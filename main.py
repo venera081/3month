@@ -1,4 +1,6 @@
 import flet as ft
+import datetime 
+
 
 def main(page: ft.Page):
     page.title = "Моё первое приложение!"
@@ -13,13 +15,14 @@ def main(page: ft.Page):
     def on_button_click(e):
         name = name_input.value.strip()
         #print(name)
+        time_name = datetime.datetime.now().strftime("%Y/%m/%d %H:%M:%S") 
 
         if name:
             greeting_text.value = f"Hello {name}!"
             #print(greeting_text)
             name_input.value = ''
 
-            greeting_history.append(f"{name}")
+            greeting_history.append(f"{time_name} {name}")
             history_text.value = "История приветствий:\n " + "\n".join(greeting_history)
 
         else:
