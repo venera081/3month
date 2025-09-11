@@ -30,6 +30,8 @@ def main(page: ft.Page):
 
         page.update()
 
+    
+
     def clear_history(e):
         greeting_history.clear()
         history_text.value = "История приветствий"
@@ -43,6 +45,17 @@ def main(page: ft.Page):
             page.theme_mode = ft.ThemeMode.LIGHT
         page.update()
 
+    def toggle_history(e):
+        if history_text.value:  # если текст истории есть
+            history_text.value = ""
+            toggle_history_button.text = "Показать историю"
+        else:
+            history_text.value = "История приветствий:\n " + "\n".join(greeting_history)
+            toggle_history_button.text = "Скрыть историю"
+        page.update()
+
+
+
 
 
 
@@ -50,9 +63,11 @@ def main(page: ft.Page):
     name_button = ft.ElevatedButton(text="SEND", on_click=on_button_click)
     clear_history_button = ft.IconButton(icon=ft.Icons.DELETE, on_click=clear_history)
     theme_button = ft.IconButton(icon=ft.Icons.BRIGHTNESS_6, on_click=theme, tooltip="Сменит тему")
+    toggle_history_button = ft.ElevatedButton(text="Скрыть историю", on_click=toggle_history)
 
 
-    page.add(greeting_text, name_input, name_button, clear_history_button,theme_button, history_text)
+
+    page.add(greeting_text, name_input, name_button, clear_history_button,theme_button, toggle_history_button, history_text)
 
 
 ft.app(target=main)    
